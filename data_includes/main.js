@@ -49,7 +49,7 @@ newTrial("instructions",
 
 newTrial("practice",
 
-    newAudio("model","da+08.wav"),
+    newAudio("model","dax08.wav"),
     newAudio("different","da24.wav"),
     newAudio("same","da04.wav"),
     newKey("play-model", "BF")
