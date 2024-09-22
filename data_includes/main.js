@@ -26,19 +26,20 @@ newTrial("instructions",
 
     fullscreen(),
     
-    newText(`<p>Welcome! In this experiment, you will hear pairs of sounds, separated by a brief interval. </p>
-            <p> Many will sound similar, and many will sound different.</p>
-            <p> Your task is to decide which pairs are the same or different.</p>
-            <p> Make your judgment based on whether you think the two sounds would be labeled with the same letter, or if they sound like the same letter to you. </p>
-            Press the 'f' button if the sounds are the SAME.</p><p>
-            Press the 'j' button if the sounds are DIFFERENT.</p><p>
-            Try to respond as accurately and quickly as possible. If you wait more than 6 seconds, you will not be able to respond, and the next sound will be played.</p><p>
-            Before you begin, you will have a chance to practice a little bit.</p>`)
+    newText(`<div style="display: block; justify-content: space-between; padding: 0 50px;">
+            <p>Welcome!</p>
+            <p>In this experiment, you will hear pairs of sounds with a brief pause between them. Some pairs will sound very similar, while others will sound different.</p>
+            <p>Your task is to decide whether both sounds in each pair correspond to the same letter or to different letters. Make your judgment based on whether you think the two sounds would be labeled with the same letter, or, in other words, if they sound like the same letter to you. </p>
+            <p>Press the 'J' button if the sounds correspond to the SAME letter.</p>
+            <p>Press the 'F' button if the sounds correspond to DIFFERENT letters.</p>
+            <p>Please try to respond as quickly and accurately as possible. If you take longer than 6 seconds to respond, the next sound will play automatically.</p>
+            <p>Before the experiment starts, you will have a chance to practice to get familiar with the task and the sound contrasts.</p>
+            <p>Click the button below when you are ready to begin the practice session.</p></div>`)
             .css("font-family", "Helvetica, sans-serif")
             .css("font-size", "16px")
             .print("center at 50%", "middle at 50%")
     ,
-    newButton("Click when you are ready to begin")
+    newButton("Start")
         .css("font-family", "Helvetica, sans-serif")
         .css("font-size", "16px")
         .center()
@@ -52,28 +53,30 @@ newTrial("practice",
     newAudio("model","dax08.wav"),
     newAudio("different","da24.wav"),
     newAudio("same","da04.wav"),
-    newKey("play-model", "BF")
+    newKey("play-model", "B")
     .settings.callback(
         getAudio("model")
         .play("once")
         .remove()
         ),
-       newKey("play-different", "J")
+       newKey("play-different", "F")
     .settings.callback(
         getAudio("different")
         .play("once")
         .remove()
         ),
-    newKey("play-same", "N")
+    newKey("play-same", "J")
     .settings.callback(
         getAudio("same")
         .play("once")
         .remove()
         ),
-    newText(`<p>This is practice. Press 'b' for a model sound.</p><p>
-            Press 'f' for an example of a sound that is the same as the model.</p><p>
-            Press 'j' for an example of a sound that is different from the model.</p><p>
-            Press 'n' for an example of a sound that is different from the model, but could get the same letter label as the model.</p><p>`)
+    newText(`<div style="display: block; justify-content: space-between; padding: 0 50px;">
+            <p>This practice session will help you get familiar with the task and the sound contrasts.</p>
+            <p>Press 'B' to hear a model sound.</p>
+            <p>Press 'J' to hear an example of a sound that is different from the model, but would still be labeled with the same letter.</p> 
+            <p>Press 'F' to hear an example of a sound that is different from the model and would be labeled with a different letter.</p>
+            <p>When you are ready to begin the experiment, click the button below.</p></div>`)
             .css("font-family", "Helvetica, sans-serif")
             .css("font-size", "16px")
             .print("center at 50%", "middle at 50%")
@@ -92,11 +95,17 @@ Template( "Russian_DIS.csv",
     currentrow => 
     newTrial("main.trial",
 
-    newText(`<p>Remember:</p><p>
-            For SAME sounds press the 'f' key after the second sound.</p><p>
-            For DIFFERENT sounds press the 'j' key after the second sound.</p><p>`)
+    newText(`
+            <div style="display: flex; justify-content: space-between;">
+            <div style="text-align: center; width: 50%; padding-right: 100px;">
+            <p>Press '<b>F</b>' for <br> <b>DIFFERENT</b></p>
+            </div>
+            <div style="text-align: center; width: 50%; padding-left: 100px;">
+            <p>Press '<b>J</b>' for <br> <b>SAME</b></p>
+            </div>
+            </div>`)
             .css("font-family", "Helvetica, sans-serif")
-            .css("font-size", "24px")
+            .css("font-size", "16px")
             .print("center at 50%", "middle at 50%"),
     
     // Timing schedule:
@@ -121,7 +130,7 @@ Template( "Russian_DIS.csv",
 
     newAudio("cur.trial.sound2",currentrow.SoundFile2).play("once"),
 
-    newKey("cur.response", "F","J")
+    newKey("cur.response", "J","F")
         .log("first")
         .callback( getTimer("deadline").stop()  )
         .callback( getVar("RT").set( v => Date.now() - v )),
@@ -139,7 +148,8 @@ newTrial("rest",
 
     fullscreen(),
     
-    newText(`<p>Please take a short break.</p>`)
+   newText(`<div style="display: block; justify-content: space-between; padding: 0 50px;">
+            <p>Please take a short break.</p></div>`)
             .css("font-family", "Helvetica, sans-serif")
             .css("font-size", "16px")
             .print("center at 50%", "middle at 50%")
@@ -158,7 +168,8 @@ SendResults("send");
 newTrial("end",
     exitFullscreen()
     ,
-    newText("The is the end of the experiment, you can now close this window. Thank you!")
+    newText(`<div style="display: block; justify-content: space-between; padding: 0 50px;">
+         <p>"The is the end of the experiment, you can now close this window. Thank you!"</p></div>`)
         .css("font-family", "Helvetica, sans-serif")
         .css("font-size", "16px")
         .center()
