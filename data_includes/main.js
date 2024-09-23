@@ -51,8 +51,8 @@ newTrial("instructions",
 newTrial("practice",
 
     newAudio("model","dax08.wav"),
-    newAudio("different","da24.wav"),
-    newAudio("same","da04.wav"),
+    newAudio("different","da44.wav"),
+    newAudio("same","dax02.wav"),
     newKey("play-model", "B")
     .settings.callback(
         getAudio("model")
